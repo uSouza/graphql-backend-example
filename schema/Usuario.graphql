@@ -12,6 +12,12 @@ input UsuarioInput {
     perfis: [PerfilFiltro]
 }
 
+input UsuarioRegistrarInput {
+    nome: String
+    email: String
+    senha: String
+}
+
 input UsuarioFiltro {
     id: Int
     email: String

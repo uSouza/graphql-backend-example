@@ -1,6 +1,11 @@
 type Mutation {
     # Virgula opcional
     # Mutations de Usuario
+
+    registrarUsuario(
+        dados: UsuarioRegistrarInput!
+    ): Usuario!
+
     novoUsuario(
         dados: UsuarioInput!
     ): Usuario!
