@@ -18,8 +18,7 @@ module.exports = {
 
     return {
       ...usuarioInfo,
-      token: jwt.encode(usuarioInfo,
-        process.env.APP_AUTH_SECRET)
+      token: jwt.encode(usuarioInfo, process.env.APP_AUTH_SECRET)
     }
   }
 }

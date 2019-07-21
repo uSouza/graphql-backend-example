@@ -13,7 +13,8 @@ const mutations = {
       }
     })
   },
-  async novoUsuario(_, { dados }) {
+  async novoUsuario(_, { dados }, ctx) {
+    ctx && ctx.isAdmin()
     try {
       const idsPerfis = []
 
@@ -51,7 +52,8 @@ const mutations = {
       throw new Error(e.sqlMessage)
     }
   },
-  async excluirUsuario(_, args) {
+  async excluirUsuario(_, args, ctx) {
+    ctx && ctx.isAdmin()
     try {
       const usuario = await obterUsuario(_, args)
       if (usuario) {
@@ -67,12 +69,13 @@ const mutations = {
     }
 
   },
-  async alterarUsuario(_, { filtro, dados }) {
+  async alterarUsuario(_, { filtro, dados }, ctx) {
+    ctx && ctx.userFilterValidate(filtro)
     try {
       const usuario = await obterUsuario(_, { filtro })
       if (usuario) {
         const { id } = usuario
-        if (dados.perfis) {
+        if (ctx.isAdmin && dados.perfis) {
           await db('usuarios_perfis')
             .where({ usuario_id: id }).delete()
 
